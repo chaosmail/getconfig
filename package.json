@@ -10,12 +10,13 @@
     },
     "dependencies": {
         "colors": "0.6.2",
-        "alce": "1.0.0"
+        "alce": "1.0.0",
+        "merge-recursive": "0.0.3"
     },
     "devDependencies": {
-        "tape": "~2.3.0"
+        "mocha": "1.20.0"
     },
     "scripts": {
-        "test": "node tests/tests.js"
+        "test": "mocha"
     }
 }

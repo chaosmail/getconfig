@@ -1,9 +1,10 @@
 #getconfig - config fetcher for node.js
 
-Managing configs for different envirments is kind of a pain. 
+Managing configs for different environments is kind of a pain.
 
 In short I wanted it to:
-- Be simple to understand and use
+- Organize configurations in different directories ('dev', 'test', 'production', ..)
+- Automatically merge with the configuration file in the root directory
 - Use `NODE_ENV` environment variable to grab appropriate config
 - let me just go `var config = require('getconfig')` from anywhere in the app and have it Just Work™
 - Let me write configs that are structured like JSON but:
@@ -11,33 +12,31 @@ In short I wanted it to:
     - single quotes
     - trailing commas
 
-
 ## How to use
 
 1. `npm install getconfig`
-2. Create a `dev_config.json` file in the same folder as the main entry point (usually project root)
+2. Create a `app.json` file
 3. Just require getconfig like so from anywhere in your project:
 
 ```js
 var config = require('getconfig');
-
+var appConfig = config.get('test/config/app');
 ```
 4. that's it!
 
 
 ## Where to put your config and what to call it
 
-Again, getconfig looks for a config file in the same folder as the main entry point of your app. In most cases, that's the root of your project.
-
-Just name it so that it matches the following pattern: `{{ environment name }}_config.json`.
+Just place it so that it matches the following pattern: `config.json` and `{{ environment name }}/config.json`.
 
 If `NODE_ENV` isn't set it defaults to `dev`.
 
 You can set name your environments whatever you want, but we color these nicely:
 
-- `dev` - dev_config.json
-- `test` - test_config.json
-- `production` - production_config.json
+- `root` - app.json
+- `root/dev` - app.json
+- `root/test` - app.json
+- `root/production` - app.json
 
 
 ## Comments in JSON, oh my!
@@ -75,6 +74,7 @@ getconfig will always fill in the `getconfig.env` value in your resulting config
 
 ## Changelog
 
+0.4.0 - Configurations now loaded from ENV directory
 0.3.0 - Switching from JSON.parse to ALCE to allow single quotes and comments. Better readme.
 
 
