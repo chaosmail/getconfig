@@ -1,12 +1,12 @@
 {
     "name": "getconfig",
-    "version": "0.3.0",
+    "version": "0.4.0",
     "author": "Henrik Joreteg <henrik@andyet.net>",
-    "description": "Environment aware config reader that follows our conventions at &yet.",
+    "description": "Environment aware config reader.",
     "main": "getconfig.js",
     "repository": {
         "type": "git",
-        "url": "git@github.com:HenrikJoreteg/getconfig.git"
+        "url": "git@github.com:chaosmail/getconfig.git"
     },
     "dependencies": {
         "colors": "0.6.2",

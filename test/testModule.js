@@ -1,7 +1,7 @@
 var config = require('../getconfig.js');
 
 var assert = require('assert');
-var NODE_ENV = process.env.NODE_ENV || 'dev';
+var NODE_ENV = process.env.NODE_ENV || 'development';
 
 describe('getconfig', function(){
     describe('#get()', function(){
@@ -18,7 +18,7 @@ describe('getconfig', function(){
                 var appConfig = config.get('test/config/app');
 
                 assert.equal(appConfig.test, 'base-test');
-                assert.equal(appConfig.testOverwrite, 'dev-value-overwritten');
+                assert.equal(appConfig.testOverwrite, 'development-value-overwritten');
             }
         })
     })

@@ -3,7 +3,7 @@
 Managing configs for different environments is kind of a pain.
 
 In short I wanted it to:
-- Organize configurations in different directories ('dev', 'test', 'production', ..)
+- Organize configurations in different directories ('development', 'test', 'production', ..)
 - Automatically merge with the configuration file in the root directory
 - Use `NODE_ENV` environment variable to grab appropriate config
 - let me just go `var config = require('getconfig')` from anywhere in the app and have it Just Work™
@@ -26,7 +26,7 @@ var appConfig = config.get('test/config/app');
 
 
 ## Where to put your config and what to call it
-
+"testOverwrite"
 Just place it so that it matches the following pattern: `config.json` and `{{ environment name }}/config.json`.
 
 If `NODE_ENV` isn't set it defaults to `dev`.
@@ -75,6 +75,7 @@ getconfig will always fill in the `getconfig.env` value in your resulting config
 ## Changelog
 
 0.4.0 - Configurations now loaded from ENV directory
+
 0.3.0 - Switching from JSON.parse to ALCE to allow single quotes and comments. Better readme.
 
 

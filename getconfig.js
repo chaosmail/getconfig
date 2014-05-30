@@ -2,14 +2,14 @@ var ALCE = require('alce'),
     fs = require('fs'),
     path = require('path'),
     merge = require('merge-recursive'),
-    env = process.env.NODE_ENV || 'dev',
+    env = process.env.NODE_ENV || 'development',
     colors = require('colors'),
     useColor = true,
     silent = true,
     color;
 
 // set our color based on environment
-if (env === 'dev') {
+if (env === 'development') {
     color = 'red';
 } else if (env === 'test') {
     color = 'yellow';
