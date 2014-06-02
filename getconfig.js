@@ -74,7 +74,7 @@ function getEnvFile(filePath) {
 // export it
 module.exports.get = function(fileName) {
 
-    var filePath = path.normalize(path.join(process.cwd(),fileName)),
+    var filePath = path.normalize(fileName),
         config = {};
 
     if (path.extname(fileName) === ".json") {

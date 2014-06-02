@@ -8,14 +8,14 @@ describe('getconfig', function(){
         it('should return merged configuration from js config', function(){
             if (NODE_ENV === 'test') {
 
-                var appConfig = config.get('test/config/app');
+                var appConfig = config.get(process.cwd() + '/test/config/app');
 
                 assert.equal(appConfig.test, 'base-test');
                 assert.equal(appConfig.testValue, 'test-value');
                 assert.equal(appConfig.testOverwrite, 'test-value-overwritten');
             } else {
 
-                var appConfig = config.get('test/config/app');
+                var appConfig = config.get(process.cwd() + '/test/config/app');
 
                 assert.equal(appConfig.test, 'base-test');
                 assert.equal(appConfig.testValue, 'development-value');
