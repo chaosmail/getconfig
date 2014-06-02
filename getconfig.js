@@ -60,21 +60,46 @@ function parse(fileName) {
 // log out what we've got
 if (!silent) console.log(c(c(env, color), 'bold') + c(' environment detected', 'grey'));
 
+function getEnvFile(filePath) {
+
+    var envFilePath = path.join(path.dirname(filePath), env, path.basename(filePath));
+
+    if (env && envFilePath !== filePath && fs.existsSync(envFilePath)) {
+        return envFilePath;
+    }
+    else
+        return false;
+}
+
 // export it
 module.exports.get = function(fileName) {
 
-    if (path.extname(fileName) !== ".json") {
-        fileName += ".json";
+    var filePath = path.normalize(path.join(process.cwd(),fileName)),
+        config = {};
+
+    if (path.extname(fileName) === ".json") {
+
+        config = parse(filePath);
+
+        var envFilePath = getEnvFile(filePath);
+
+        if (envFilePath) {
+            config = merge.recursive(config, parse(envFilePath));
+        }
     }
+    else {
 
-    var filePath = path.normalize(fileName),
-        envFilePath = path.join(path.dirname(filePath), env, path.basename(filePath));
+        if (path.extname(fileName) !== ".js") {
+            filePath += '.js';
+        }
 
-    var config = parse(filePath);
+        config = require(filePath)
 
-    if (env && envFilePath !== filePath && fs.existsSync(envFilePath)) {
+        var envFilePath = getEnvFile(filePath);
 
-        config = merge.recursive(config, parse(envFilePath));
+        if (envFilePath) {
+            config = merge.recursive(config, require(envFilePath));
+        }
     }
 
     return config;

@@ -15,7 +15,7 @@ In short I wanted it to:
 ## How to use
 
 1. `npm install getconfig`
-2. Create a `app.json` file
+2. Create a `app.json` file or `app.js` module
 3. Just require getconfig like so from anywhere in your project:
 
 ```js
@@ -27,14 +27,14 @@ var appConfig = config.get('test/config/app');
 
 ## Where to put your config and what to call it
 "testOverwrite"
-Just place it so that it matches the following pattern: `config.json` and `{{ environment name }}/config.json`.
+Just place it so that it matches the following pattern: `{{ config }}.(json|js)` and `{{ env }}/{{ config }}.(json|js)`.
 
-If `NODE_ENV` isn't set it defaults to `dev`.
+If `NODE_ENV` isn't set it defaults to `development`.
 
 You can set name your environments whatever you want, but we color these nicely:
 
 - `root` - app.json
-- `root/dev` - app.json
+- `root/development` - app.json
 - `root/test` - app.json
 - `root/production` - app.json
 
@@ -43,38 +43,16 @@ You can set name your environments whatever you want, but we color these nicely:
 
 getconfig uses [ALCE](https://github.com/walmartlabs/ALCE) to parse JSON files, which means you can use comments, single quotes, and unquoted keys, woohoo! But of course it works just fine on regular JSON too. It just gives you the option.
 
-
-## Explicitly setting the config location
-
-In certain circumstances, when your app isn't run directly (e.g. test runners) getconfig may not be able to lookup your config file properly. In this case, you can set a `GETCONFIG_ROOT` environment variable to directory where your configs are held.
-
-
-## Other options, info
-
-You can also tell getconfig whether you want it to log out it's environment info (as it does by default) and whether or not to use colors in output. By adding the following to your `{{some name}}_config.json` file:
-
-```json
-{
-    "getconfig": {
-        "colors": false, //turns off colors
-    }
-}
-```
-
-```json
-{
-    "getconfig": {
-        "silent": true, //turns off all output
-    }
-}
-```
+## Options
 
 getconfig will always fill in the `getconfig.env` value in your resulting config object with the current environment name so you can programatically determine the environment if you'd like.
 
 
 ## Changelog
 
-0.4.0 - Configurations now loaded from ENV directory
+0.5.0 - Now allowing to import config files as node modules <added in chaosmail/getconfig>
+
+0.4.0 - Configurations now loaded from ENV directory <added in chaosmail/getconfig>
 
 0.3.0 - Switching from JSON.parse to ALCE to allow single quotes and comments. Better readme.
 
